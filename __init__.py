@@ -15,8 +15,15 @@ class Page(object):
         self.contents = s.decode()
 
 class PageController(cytoplasm.controllers.Controller):
-    "A controller for just pages written in, for example, markdown."
+    "A controller for putting pages inside templates."
     def __call__(self):
-        for page in os.listdir(self.data_directory): print page 
+        template = "%s/%s" %(self.templates_directory, "page.mako")
+        for page in os.listdir(self.data_directory):
+            # save to the destination directory with a filename minus the last extension
+            destination = "%s/%s" %(self.destination_directory, ".".join(page.split(".")[:-1]))
+            page_object = Page("%s/%s" %(self.data_directory, page))
+            # interpret the template to the destination above;
+            # give it the page object as an argument.
+            cytoplasm.interpreters.interpret(template, destination, page=page_object)
 
 info= { "class": PageController }
