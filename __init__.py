@@ -1,0 +1,19 @@
+from cytoplasm import interpret
+
+class Page(object):
+    def __init__(self, path):
+        # interpret this file
+        interpret(path, self)
+
+    def close(self):
+        # This is just here so that python doesn't throw up an error when something else thinks
+        # this is a file.
+        pass
+
+    def write(self, s):
+        # instead of writing to disk, simply change the contents attribute.
+        self.contents = s.decode()
+
+class PageController(object):
+    "A controller for just pages written in, for example, markdown."
+    pass
