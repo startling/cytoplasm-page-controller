@@ -1,9 +1,9 @@
-from cytoplasm import interpret
+import cytoplasm
 
 class Page(object):
     def __init__(self, path):
         # interpret this file
-        interpret(path, self)
+        cytoplasm.interpreters.interpret(path, self)
 
     def close(self):
         # This is just here so that python doesn't throw up an error when something else thinks
@@ -14,6 +14,6 @@ class Page(object):
         # instead of writing to disk, simply change the contents attribute.
         self.contents = s.decode()
 
-class PageController(object):
+class PageController(cytoplasm.controllers.Controller):
     "A controller for just pages written in, for example, markdown."
-    pass
+    for page in os.listdir(self.data_directory): print page 
