@@ -1,4 +1,4 @@
-import cytoplasm
+import cytoplasm, os
 
 class Page(object):
     def __init__(self, path):
@@ -16,4 +16,7 @@ class Page(object):
 
 class PageController(cytoplasm.controllers.Controller):
     "A controller for just pages written in, for example, markdown."
-    for page in os.listdir(self.data_directory): print page 
+    def __call__(self):
+        for page in os.listdir(self.data_directory): print page 
+
+info= { "class": PageController }
