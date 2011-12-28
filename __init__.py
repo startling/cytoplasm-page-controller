@@ -17,7 +17,7 @@ class Page(object):
 class PageController(cytoplasm.controllers.Controller):
     "A controller for putting pages inside templates."
     def __call__(self):
-        template = "%s/%s" %(self.templates_directory, "page.mako")
+        template = self.template("page")
         for page in os.listdir(self.data_directory):
             # save to the destination directory with a filename minus the last extension
             destination = "%s/%s" %(self.destination_directory, ".".join(page.split(".")[:-1]))
