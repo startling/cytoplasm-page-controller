@@ -1,6 +1,7 @@
 import cytoplasm, os
 
 class Page(object):
+    "A file-like object that'll be created from each file in the source directory."
     def __init__(self, path):
         # interpret this file
         cytoplasm.interpreters.interpret(path, self)
