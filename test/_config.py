@@ -11,5 +11,5 @@ def markdown_interpreter(file, destination):
             extensions = markdown_extensions, encoding="utf8", safe=False)
 
 controllers = [
-    ("page", ["_pages", "_build", "_controllers/page/templates"]),
+    ("page", ["_pages", "_build", "_templates"]),
 ]
