@@ -23,7 +23,7 @@ class PageController(cytoplasm.controllers.Controller):
             # save to the destination directory with a filename minus the last extension
             destination =  os.path.join(self.destination_directory,
                     cytoplasm.interpreters.interpreted_filename(page))
-            page_object = Page("%s/%s" %(self.data_directory, page))
+            page_object = Page(os.path.join(self.data_directory, page))
             # interpret the template to the destination above;
             # give it the page object as an argument.
             cytoplasm.interpreters.interpret(template, destination, page=page_object)
