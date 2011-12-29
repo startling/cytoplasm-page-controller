@@ -1,4 +1,5 @@
 import os
+import cytoplasm
 from cytoplasm.test import Base
 
 class TestPageController(Base):
@@ -27,7 +28,7 @@ class TestPageController(Base):
                 source_contents = f.read()
                 f.close()
                 # get the contents of the built file
-                shortened_filename = ".".join(file.split(".")[:-1])
+                shortened_filename = cytoplasm.interpreters.interpreted_filename(file)
                 f = open(os.path.join(self.directory, build, shortened_filename))
                 build_contents = f.read()
                 f.close()
