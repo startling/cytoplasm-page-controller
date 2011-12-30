@@ -2,9 +2,11 @@ import os, unittest
 import cytoplasm
 from cytoplasm.test_build import Base
 
+test_site = os.path.join(os.path.dirname(__file__), "test")
+
 class TestPageController(Base):
     def setUp(self):
-        Base.setUp(self, "test")
+        Base.setUp(self, test_site)
 
     def test_page_controller(self):
         "Test that the template is correctly applied to each of the files in the source directory."
