@@ -3,8 +3,8 @@ import cytoplasm
 from cytoplasm.test import Base
 
 class TestPageController(Base):
-    def __init__(self):
-        Base.__init__(self, "test")
+    def setUp(self):
+        Base.setUp(self, "test")
 
     def test_page_controller(self):
         "Test that the template is correctly applied to each of the files in the source directory."
