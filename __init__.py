@@ -12,8 +12,12 @@ class Page(object):
         pass
 
     def write(self, s):
-        # instead of writing to disk, simply change the contents attribute.
-        self.contents = s.decode("utf-8")
+        "Instead of writing to disk, simply save to self.contents."
+        # if s is a bytes object, decode it.
+        if isinstance(s, bytes):
+            s = s.decode("utf-8")
+        # save to self.contents.
+        self.contents = s
 
 class PageController(cytoplasm.controllers.Controller):
     "A controller for putting pages inside templates."
