@@ -1,6 +1,6 @@
 import os, unittest
 import cytoplasm
-from cytoplasm.test import Base
+from cytoplasm.test_build import Base
 
 class TestPageController(Base):
     def setUp(self):
