@@ -6,7 +6,7 @@ class TestPageController(Base):
     def __init__(self):
         Base.__init__(self, "test")
 
-    def page_controller_test(self):
+    def test_page_controller(self):
         "Test that the template is correctly applied to each of the files in the source directory."
         # a list of all the page controllers.
         controllers = [c for c in self.configuration.controllers if c[0] == "page"]
