@@ -1,4 +1,4 @@
-import os
+import os, unittest
 import cytoplasm
 from cytoplasm.test import Base
 
@@ -39,4 +39,5 @@ class TestPageController(Base):
                 # make sure it ends with the last part of the template
                 assert build_contents.endswith(template_after)
 
-
+if __name__ == '__main__':
+    unittest.main()
