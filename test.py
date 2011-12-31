@@ -16,9 +16,8 @@ class TestPageController(Base):
         for controller, [source, build, templates] in controllers:
             # read the template.
             # assume the template in question is a mako template, too.
-            f = open(os.path.join(self.directory, templates, "page.mako"))
-            template = f.read()
-            f.close()
+            with open(os.path.join(self.directory, templates, "page.mako")) as f:
+                template = f.read()
             # for the purposes of this test, assume there is no actual logic going on,
             # just interpolation. Get everything before and after ${page.contents}.
             template_before, template_after = template.split("${page.contents}")
@@ -26,14 +25,12 @@ class TestPageController(Base):
             # for each of the source files:
             for file in os.listdir(os.path.join(self.directory, source)):
                 # get the contents of the file.
-                f = open(os.path.join(self.directory, source, file))
-                source_contents = f.read()
-                f.close()
+                with open(os.path.join(self.directory, source, file)) as f:
+                    source_contents = f.read()
                 # get the contents of the built file
                 shortened_filename = cytoplasm.interpreters.interpreted_filename(file)
-                f = open(os.path.join(self.directory, build, shortened_filename))
-                build_contents = f.read()
-                f.close()
+                with open(os.path.join(self.directory, build, shortened_filename)) as f:
+                    build_contents = f.read()
                 # make sure it starts with the first part of the template:
                 assert build_contents.startswith(template_before)
                 # make sure it contains the contents of the source file:
