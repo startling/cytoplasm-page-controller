@@ -4,7 +4,7 @@ class Page(object):
     "A file-like object that'll be created from each file in the source directory."
     def __init__(self, path):
         # interpret this file
-        cytoplasm.interpreters.interpret(path, self)
+        cytoplasm.interpreters.interpret_to_filelike(path, self)
 
     def close(self):
         # This is just here so that python doesn't throw up an error when something else thinks
