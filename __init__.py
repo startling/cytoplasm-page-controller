@@ -1,14 +1,16 @@
-import cytoplasm, os
+import os
+import cytoplasm
+
 
 class Page(object):
-    "A file-like object that'll be created from each file in the source directory."
+    "A file-like object that'll be created from each file in the source dir."
     def __init__(self, path):
         # interpret this file
         cytoplasm.interpreters.interpret_to_filelike(path, self)
 
     def close(self):
-        # This is just here so that python doesn't throw up an error when something else thinks
-        # this is a file.
+        # This is just here so that python doesn't throw up an error when
+        # something else think this is a file.
         pass
 
     def write(self, s):
@@ -19,17 +21,20 @@ class Page(object):
         # save to self.contents.
         self.contents = s
 
+
 class PageController(cytoplasm.controllers.Controller):
     "A controller for putting pages inside templates."
     def __call__(self):
         template = self.template("page")
         for page in os.listdir(self.data_directory):
-            # save to the destination directory with a filename minus the last extension
-            destination =  os.path.join(self.destination_directory,
+            # save to the destination directory with a filename minus the
+            # last extension
+            destination = os.path.join(self.destination_directory,
                     cytoplasm.interpreters.interpreted_filename(page))
             page_object = Page(os.path.join(self.data_directory, page))
             # interpret the template to the destination above;
             # give it the page object as an argument.
-            cytoplasm.interpreters.interpret(template, destination, page=page_object)
+            cytoplasm.interpreters.interpret(template, destination,
+                                                page=page_object)
 
-info= { "class": PageController }
+info = {"class": PageController}
