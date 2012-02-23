@@ -4,9 +4,10 @@ import cytoplasm
 
 class Page(object):
     "A file-like object that'll be created from each file in the source dir."
-    def __init__(self, path):
+    def __init__(self, controller, path):
         # interpret this file
-        cytoplasm.interpreters.interpret_to_filelike(path, self)
+        cytoplasm.interpreters.interpret_to_filelike(path, self,
+                controller.site)
 
     def close(self):
         # This is just here so that python doesn't throw up an error when
@@ -30,11 +31,12 @@ class PageController(cytoplasm.controllers.Controller):
             # save to the destination directory with a filename minus the
             # last extension
             destination = os.path.join(self.destination_directory,
-                    cytoplasm.interpreters.interpreted_filename(page))
-            page_object = Page(os.path.join(self.data_directory, page))
+                    cytoplasm.interpreters.interpreted_filename(page, self.site))
+            page_object = Page(self, os.path.join(self.data_directory, page))
             # interpret the template to the destination above;
             # give it the page object as an argument.
             cytoplasm.interpreters.interpret(template, destination,
-                                                page=page_object)
+                    self.site, page=page_object)
+
 
 info = {"class": PageController}
